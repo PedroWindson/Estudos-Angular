@@ -1,0 +1,39 @@
+<h2>Cadastro</h2>
+<form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="nome">Nome:</label>
+    <input id="nome" formControlName="nome" aria-describedby="nomeErro" />
+    <div id="nomeErro" *ngIf="cadastroForm.get('nome')?.invalid && cadastroForm.get('nome')?.touched">
+      <small *ngIf="cadastroForm.get('nome')?.errors?.['required']">O nome é obrigatório.</small>
+      <small *ngIf="cadastroForm.get('nome')?.errors?.['minlength']">O nome deve ter pelo menos 3 caracteres.</small>
+    </div>
+  </div>
+
+  <div>
+    <label for="email">Email:</label>
+    <input id="email" formControlName="email" aria-describedby="emailErro" />
+    <div id="emailErro" *ngIf="cadastroForm.get('email')?.invalid && cadastroForm.get('email')?.touched">
+      <small *ngIf="cadastroForm.get('email')?.errors?.['required']">O email é obrigatório.</small>
+      <small *ngIf="cadastroForm.get('email')?.errors?.['email']">O email não é válido.</small>
+    </div>
+  </div>
+
+  <div>
+    <label for="senha">Senha:</label>
+    <input id="senha" type="password" formControlName="senha" aria-describedby="senhaErro" />
+    <div id="senhaErro" *ngIf="cadastroForm.get('senha')?.invalid && cadastroForm.get('senha')?.touched">
+      <small *ngIf="cadastroForm.get('senha')?.errors?.['required']">A senha é obrigatória.</small>
+      <small *ngIf="cadastroForm.get('senha')?.errors?.['minlength']">A senha deve ter pelo menos 6 caracteres.</small>
+    </div>
+  </div>
+
+  <div>
+    <label for="confirmarSenha">Confirmar Senha:</label>
+    <input id="confirmarSenha" type="password" formControlName="confirmarSenha" aria-describedby="confirmarSenhaErro" />
+    <div id="confirmarSenhaErro" *ngIf="cadastroForm.errors?.['senhasNaoConferem'] && cadastroForm.get('confirmarSenha')?.touched">
+      <small>As senhas não coincidem.</small>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="cadastroForm.invalid">Cadastrar</button>
+</form>
